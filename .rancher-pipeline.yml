@@ -5,10 +5,10 @@ stages:
           image: ubuntu:latest
           shellScript: |-
             apt update
-            apt install make git curl -yq
+            apt install make git curl apt-utils -yq
             curl -fsSL get.docker.com -o get-docker.sh
             sh get-docker.sh
-            export REGISTRY=${CICD_REGISTRY}
+            export REGISTRY=1;
             make && make test
   - name: Publish image
     steps:

@@ -6,14 +6,11 @@ NODE_VER_MINOR = $(shell echo "${NODE_VER}" | grep -oE '^[0-9]+\.[0-9]+')
 BASE_IMAGE_TAG = $(NODE_VER)-alpine
 
 TAG ?= $(NODE_VER_MINOR)
-REGISTRY ?= docker.io/anaxexp
-REPO = ${REGISTRY}/node
+REPO = anaxexp/node
 NAME = node-$(NODE_VER_MINOR)
 
-ifneq ($(STABILITY_TAG),)
-    ifneq ($(TAG),latest)
-        override TAG := $(TAG)-$(STABILITY_TAG)
-    endif
+ifneq ($(REGISTRY),)
+    override REPO := node
 endif
 
 .PHONY: build test push shell run start stop logs clean release
