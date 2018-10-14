@@ -6,11 +6,6 @@ stages:
           shellScript: |-
             apt update
             apt install make git curl apt-utils -yq
-            curl -fsSL get.docker.com -o get-docker.sh
-            sh get-docker.sh
-            docker start
-            export REGISTRY=1;
-            make && make test
   - name: Publish image
     steps:
       - publishImageConfig:
