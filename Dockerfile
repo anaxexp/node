@@ -1,5 +1,5 @@
 ARG BASE_IMAGE_TAG
-
+run echo ${BASE_IMAGE_TAG:-"not set"};
 FROM node:${BASE_IMAGE_TAG}
 
 ENV APP_ROOT="/usr/src/app" \
@@ -11,13 +11,13 @@ ENV APP_ROOT="/usr/src/app" \
 RUN set -ex; \
     \
     apk add --update \
-        bash \        
-        ca-certificates \
-        curl \
-        git \
-        make \
-        wget \
-        sudo; \
+    bash \
+    ca-certificates \
+    curl \
+    git \
+    make \
+    wget \
+    sudo; \
     \
     mkdir -p "${APP_ROOT}" "${FILES_DIR}"; \
     chown node:node "${APP_ROOT}" "${FILES_DIR}"; \
