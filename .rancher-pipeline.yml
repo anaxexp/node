@@ -1,13 +1,13 @@
 stages:
-  - name: Build & Publish image
+  - name: Build image
     steps:
       - publishImageConfig:
           dockerfilePath: ./Dockerfile
           buildContext: .
           tag: node:${CICD_EXECUTION_SEQUENCE}
           registry: ${CICD_REGISTRY:-127.0.0.1:34561}
-        env:
-          BASE_IMAGE_TAG: 9.11.2
+          env:
+            BASE_IMAGE_TAG: ${CICD_EXECUTION_SEQUENCE:-9.11.2}
   - name: Deploy
     steps:
       - applyYamlConfig:
