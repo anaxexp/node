@@ -1,14 +1,17 @@
 stages:
-  - name: Build image
-    steps:
-      - publishImageConfig:
-          dockerfilePath: ./Dockerfile
-          buildContext: .
-          tag: node:${CICD_EXECUTION_SEQUENCE}
-          registry: ${CICD_REGISTRY:-127.0.0.1:34561}
-          env:
-            BASE_IMAGE_TAG: ${CICD_EXECUTION_SEQUENCE:-9.11.2}
-  - name: Deploy
-    steps:
-      - applyYamlConfig:
-          path: ./deploy/deployment.yaml
+- name: Build image
+  steps:
+  - runScriptConfig:
+      image: busybox
+      shellScript: export ${BASE_IMAGE_TAG};
+    env:
+      BASE_IMAGE_TAG: 9.11.2
+  - publishImageConfig:
+      dockerfilePath: ./Dockerfile
+      buildContext: .
+      tag: node:${CICD_EXECUTION_SEQUENCE}
+      registry: 127.0.0.1:34552
+- name: Deploy
+  steps:
+  - applyYamlConfig:
+      path: ./deploy/deployment.yaml
