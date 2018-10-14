@@ -7,7 +7,7 @@ stages:
           tag: node:${CICD_EXECUTION_SEQUENCE}
           registry: ${CICD_REGISTRY:-127.0.0.1:34561}
         env:
-          BASE_IMAGE_TAG: ${CICD_EXECUTION_SEQUENCE}
+          BASE_IMAGE_TAG: "${CICD_EXECUTION_SEQUENCE}"
   - name: Deploy
     steps:
       - applyYamlConfig:
