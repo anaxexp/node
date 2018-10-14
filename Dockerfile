@@ -1,5 +1,5 @@
 ARG BASE_IMAGE_TAG
-run echo ${BASE_IMAGE_TAG:-"not set"};
+
 FROM node:${BASE_IMAGE_TAG}
 
 ENV APP_ROOT="/usr/src/app" \
