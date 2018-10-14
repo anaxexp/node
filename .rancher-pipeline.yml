@@ -3,9 +3,9 @@ stages:
   steps:
   - runScriptConfig:
       image: busybox
-      shellScript: export ${BASE_IMAGE_TAG};
+      shellScript: export BASE_IMAGE_TAG=${IMAGE_VERSION};
     env:
-      BASE_IMAGE_TAG: 9.11.2
+      IMAGE_VERSION: 9.11.2
   - publishImageConfig:
       dockerfilePath: ./Dockerfile
       buildContext: .
