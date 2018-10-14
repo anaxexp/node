@@ -6,8 +6,8 @@ NODE_VER_MINOR = $(shell echo "${NODE_VER}" | grep -oE '^[0-9]+\.[0-9]+')
 BASE_IMAGE_TAG = $(NODE_VER)-alpine
 
 TAG ?= $(NODE_VER_MINOR)
-
-REPO = ${CICD_REGISTRY:-anaxexp}/node
+REGISTRY ?= docker.io/anaxexp
+REPO = ${REGISTRY}/node
 NAME = node-$(NODE_VER_MINOR)
 
 ifneq ($(STABILITY_TAG),)
