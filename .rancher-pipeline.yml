@@ -1,18 +1,13 @@
 stages:
-  - name: Make and Test Node
-    steps:
-      - runScriptConfig:
-          image: ubuntu:latest
-          shellScript: |-
-            apt update
-            apt install make git curl apt-utils -yq
-  - name: Publish image
+  - name: Build & Publish image
     steps:
       - publishImageConfig:
           dockerfilePath: ./Dockerfile
           buildContext: .
           tag: node:${CICD_EXECUTION_SEQUENCE}
           registry: ${CICD_REGISTRY:-127.0.0.1:34561}
+        env:
+          BASE_IMAGE_TAG: ${CICD_EXECUTION_SEQUENCE}
   - name: Deploy
     steps:
       - applyYamlConfig:
