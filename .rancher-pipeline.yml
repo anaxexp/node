@@ -1,0 +1,20 @@
+stages:
+  - name: Make and Test Node
+    steps:
+      - runScriptConfig:
+          image: ubuntu:latest
+          shellScript: |-
+            apt update
+            apt install make git docker.io -yq
+            make && make test
+  - name: Publish image
+    steps:
+      - publishImageConfig:
+          dockerfilePath: ./Dockerfile
+          buildContext: .
+          tag: node:${CICD_EXECUTION_SEQUENCE}
+          registry: ${CICD_REGISTRY:-127.0.0.1:34561}
+  - name: Deploy
+    steps:
+      - applyYamlConfig:
+          path: ./deploy/deployment.yaml
