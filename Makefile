@@ -7,7 +7,7 @@ BASE_IMAGE_TAG = $(NODE_VER)-alpine
 
 TAG ?= $(NODE_VER_MINOR)
 
-REPO = anaxexp/node
+REPO = ${CICD_REGISTRY:-anaxexp}/node
 NAME = node-$(NODE_VER_MINOR)
 
 ifneq ($(STABILITY_TAG),)

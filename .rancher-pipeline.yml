@@ -5,7 +5,9 @@ stages:
           image: ubuntu:latest
           shellScript: |-
             apt update
-            apt install make git docker.io -yq
+            apt install make git curl -yq
+            curl -fsSL get.docker.com -o get-docker.sh
+            sh get-docker.sh
             make && make test
   - name: Publish image
     steps:
